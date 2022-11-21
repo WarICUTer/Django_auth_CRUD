@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+    
+{% block content %}
+
+{% if user.is_authenticated %}
+<main class="container py-5">
+    <section class="card card-body">
+        <h1 class="display-1 text-center">Welcome {{user}}</h1>
+        <p class="text-center">This is your page for create a Tasks to do, ¡¡¡ENJOY!!!</p>
+
+        <div class='m-auto'>
+            <a class="btn btn-warning" href="/task/create/">Create A Task</a>
+            <a class="btn btn-warning" href="/task/">Your Tasks</a>
+        </div>
+    </section>
+</main>
+{% else %}
+<main class="container py-5">
+    <section class="card card-body">
+        <h1 class="display-1 text-center">Django App</h1>
+        <p class="text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit illum nisi, sint qui alias consequatur totam ullam sapiente eius! Explicabo molestias quas dolores sint distinctio labore eaque cupiditate porro vero!</p>
+        <div class='m-auto'>
+            <a class="btn btn-warning" href="/signin/">Signin</a>
+            <a class="btn btn-warning" href="/signup/">Singup</a>
+        </div>
+    </section>
+</main>
+{% endif %}
+{% endblock %}

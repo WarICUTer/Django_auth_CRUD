@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <h1 class="text-center text-primary mt-3 mb-4">Task {{uso}} of {{user}}</h1>    
+        <div class="d-flex flex-row mb-3">
+            {% for task in tasks %}
+            
+            {% if task.important %}
+            <div class="card m-2" style="width: 18rem; background-color: #FFF4CF;">
+                <div class="card-body d-block text-center">
+                    <h5 class="card-title fw-bold">
+                        {{task.title}}
+                    </h5>
+                    <p class="card-text">
+                        <p><p class="text-dark fw-semibold mb-0">Description:</p> {{task.descrip}}</p>
+                        <p><p class="text-dark fw-semibold mb-0">By:</p> {{task.user.username}}</p>
+                        <p><p class="text-dark fw-semibold mb-0">{{deta}}</p> {{task.datecompleted|date:'M j Y:i'}}</p>
+                    </p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                        <a href="{% url 'detailTask' task.id %}" class="btn btn-warning">Edit <i class="fas fa-edit"></i></a>
+                        <form action="{% url 'deleteTask' task.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card m-2" style="width: 18rem;">
+                <div class="card-body d-block text-center">
+                    <h5 class="card-title fw-bold">
+                        {{task.title}}
+                    </h5>
+                    <p class="card-text">
+                        <p><p class="text-warning fw-semibold mb-0">Description:</p> {{task.descrip}}</p>
+                        <p><p class="text-warning fw-semibold mb-0">By:</p> {{task.user.username}}</p>
+                        <p><p class="text-warning fw-semibold mb-0">{{deta}}</p> {{task.datecompleted|date:'M j Y:i'}}</p>
+                    </p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                        <a href="{% url 'detailTask' task.id %}" class="btn btn-warning">Edit <i class="fas fa-edit"></i></a>
+                        <form action="{% url 'deleteTask' task.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
